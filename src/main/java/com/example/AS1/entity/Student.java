@@ -3,6 +3,9 @@ package com.example.AS1.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Student {
     @Id
@@ -19,15 +22,19 @@ public class Student {
     @JoinColumn(name = "class_id")
     private Class studentClass;
 
+    @OneToMany(mappedBy = "student")
+    private List<Score> scores =  new ArrayList<>();
+
 
     public Student() {}
 
-    public Student(Long id, String name, String email, String phone, Class studentClass) {
+    public Student(Long id, String name, String email, String phone, Class studentClass, List<Score> scores) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.studentClass = studentClass;
+        this.scores = scores;
     }
 
     public void setId(long id) {
@@ -47,5 +54,23 @@ public class Student {
     }
     public String getEmail() {
         return email;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public void setStudentClass(Class studentClass) {
+        this.studentClass = studentClass;
+    }
+    public Class getStudentClass() {
+        return studentClass;
+    }
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
+    }
+    public List<Score> getScores() {
+        return scores;
     }
 }

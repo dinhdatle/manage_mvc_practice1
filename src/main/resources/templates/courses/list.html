@@ -1,0 +1,41 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Course</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Course List</h1>
+    <a href="/courses/add">Add New Course</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody th:each="course : ${courses}">
+        <tr>
+            <td th:text="${course.id}"></td>
+            <td th:text="${course.name}"></td>
+            <td th:text="${course.description}"></td>
+            <td>
+                <a th:href="@{/courses/edit/{id}(id=${course.id})}">Edit</a> |
+                <a th:href="@{/courses/delete/{id}(id=${course.id})}" onclick="return confirm('Are you sure?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+
+</body>
+</html>

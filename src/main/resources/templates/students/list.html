@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <h1>Student Management</h1>
+    <a href="/students/add">Add New Student</a>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody th:each="student, iterStat : ${students}">
+        <tr>
+            <td th:text="${iterStat.index + 1}"></td>
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.phone}"></td>
+            <td>
+                <a th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a> |
+                <a th:href="@{/students/delete/{id}(id=${student.id})}" onclick="return confirm('Are you sure?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+
+</body>
+</html>

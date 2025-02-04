@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scores</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Scores List</h1>
+    <a href="/scores/add">Add New Scores</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Course</th>
+                <th>Score</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody th:each="score : ${scores}">
+        <tr>
+            <td th:text="${score.id}"></td>
+            <td th:text="${score.student.name}"></td>
+            <td th:text="${score.course.name}"></td>
+            <td th:text="${score.score}"></td>
+            <td>
+                <a th:href="@{'/scores/edit/' + ${score.id}}">Edit</a>
+                <a th:href="@{'/scores/delete/' + ${score.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+
+</body>
+</html>

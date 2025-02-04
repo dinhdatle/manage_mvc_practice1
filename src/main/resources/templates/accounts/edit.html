@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+<h1>Edit Student</h1>
+<form th:action="@{/accounts/edit/{id}(id=${account.id})}" method="post">
+    <input type="hidden" name="id" th:value="${account.id}">
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" th:value="${account.username}" required>
+    <br>
+    <label for="password">Mật khẩu:</label>
+    <input type="password" id="password" name="password" required>
+
+    <div>
+        <label for="role">Role</label>
+        <select id="role" th:field="*{account.role}">
+            <option value="" disabled selected>Select Role</option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="TRAINER">TRAINER</option>
+        </select>
+    </div>
+
+    <button type="submit">Update</button>
+    <a href="/students">Cancel</a>
+</form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Account</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+<h1>Add New Account</h1>
+<form th:action="@{/accounts/add}" th:object="${account}" method="post">
+    <label for="username">Username: </label>
+    <input type="text" id="username" th:field="*{username}"/>
+    <br />
+    <label for="password">Password: </label>
+    <input type="text" id="password" th:field="*{password}"/>
+    <br />
+    <div>
+        <label for="role">Role</label>
+        <select id="role" th:field="*{role}">
+            <option value="" disabled selected>Select Role</option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="TRAINER">TRAINER</option>
+
+        </select>
+    </div>
+
+    <button type="submit">Save</button>
+    <a href="/accounts">Cancel</a>
+
+</form>
+</body>
+</html>

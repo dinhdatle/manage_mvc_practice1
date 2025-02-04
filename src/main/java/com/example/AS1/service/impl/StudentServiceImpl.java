@@ -16,13 +16,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student saveStudent(Student student) {
-        return studentRepository.save(student);
-    }
-
-    @Override
-    public Student updateStudent(Student student) {
-        return studentRepository.save(student);
+    public void saveStudent(Student student) {
+         studentRepository.save(student);
     }
 
     @Override
@@ -33,5 +28,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
     }
 }

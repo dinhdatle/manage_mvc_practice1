@@ -4,13 +4,13 @@ import com.example.AS1.entity.Student;
 import com.example.AS1.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/students")
+
 public class StudentController {
     private StudentService studentService;
 
@@ -18,25 +18,43 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/students")
+    @GetMapping
     public String listStudents(Model model) {
         List<Student> students = studentService.getAllStudents();
         model.addAttribute("students", students);
-        return "student/list";
+        return "students/list";
     }
 
-    @GetMapping("/student/add")
+    @GetMapping("/add")
     public String addStudent(Model model) {
         model.addAttribute("student", new Student());
-        return "student/add";
+        return "students/add";
     }
 
-    @PostMapping("/student/add")
-    public String addStudent(@ModelAttribute("student") Student student) {
+
+    @PostMapping("/add")
+    public String addStudent(@ModelAttribute Student student) {
         studentService.saveStudent(student);
         return "redirect:/students"; // Điều hướng sau khi lưu thành công
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+        return "redirect:/students";
+    }
 
+    @GetMapping("/edit/{id}")
+    public String editStudent(@PathVariable Long id, Model model) {
+        model.addAttribute("student", studentService.getStudentById(id));
+        return "students/edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editStudent(@ModelAttribute Student student,@PathVariable Long id) {
+        student.setId(id);
+        studentService.saveStudent(student);
+        return "redirect:/students";
+    }
 }
 
